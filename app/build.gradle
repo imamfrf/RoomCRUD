@@ -23,9 +23,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    packagingOptions {
-        exclude 'META-INF/atomicfu.kotlin_module'
-    }
     androidExtensions {
         experimental = true
     }

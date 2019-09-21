@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.imamfrf.roomcrud.model.Note
 
-
+//Database annotation to specify the entities and set version
 @Database(entities = [Note::class], version = 1, exportSchema = false)
 abstract class NoteRoomDatabase : RoomDatabase() {
 
@@ -22,8 +22,8 @@ abstract class NoteRoomDatabase : RoomDatabase() {
                     NoteRoomDatabase::class.java,
                     "note_db"
                 )
-                    .allowMainThreadQueries()
-                    .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries() //allows Room to executing task in main thread
+                    .fallbackToDestructiveMigration() //allows Room to recreate table if no migrations found
                     .build()
 
                 INSTANCE = instance

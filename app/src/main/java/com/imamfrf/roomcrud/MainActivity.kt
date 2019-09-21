@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
         val dao = database.getNoteDao()
         val listItems = arrayListOf<Note>()
         listItems.addAll(dao.getAll())
+        setupRecyclerView(listItems)
         if (listItems.isNotEmpty()){
             text_view_note_empty.visibility = View.GONE
-            setupRecyclerView(listItems)
         }
         else{
             text_view_note_empty.visibility = View.VISIBLE

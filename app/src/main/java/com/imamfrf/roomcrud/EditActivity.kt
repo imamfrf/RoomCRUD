@@ -35,22 +35,25 @@ class EditActivity : AppCompatActivity() {
 
             edit_text_title.setSelection(note.title.length)
 
-            Log.d("tes123", "id = ${note.id}")
         }
 
         button_save.setOnClickListener {
             val title = edit_text_title.text.toString()
             val body = edit_text_body.text.toString()
 
-            if (isUpdate){
-                saveNote(Note(id = note.id, title = title, body = body))
+            if (title.isEmpty() && body.isEmpty()){
+                Toast.makeText(applicationContext, "Note cannot be empty", Toast.LENGTH_SHORT).show()
             }
             else{
-                saveNote(Note(title = title, body = body))
+                if (isUpdate){
+                    saveNote(Note(id = note.id, title = title, body = body))
+                }
+                else{
+                    saveNote(Note(title = title, body = body))
+                }
             }
 
             finish()
-
         }
 
         button_delete.setOnClickListener {
@@ -63,12 +66,10 @@ class EditActivity : AppCompatActivity() {
     private fun saveNote(note: Note){
 
         if (dao.getById(note.id).isEmpty()){
-            Log.d("tes123", "insert")
 
             dao.insert(note)
         }
         else{
-            Log.d("tes123", "update")
 
             dao.update(note)
         }
@@ -80,6 +81,5 @@ class EditActivity : AppCompatActivity() {
     private fun deleteNote(note: Note){
         dao.delete(note)
         Toast.makeText(applicationContext, "Note removed", Toast.LENGTH_SHORT).show()
-
     }
 }
